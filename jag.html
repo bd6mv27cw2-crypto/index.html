@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Практическое задание №13</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        color: blue; /* наследование (задание 1) */
+        background: #f5f5f5;
+        margin: 20px;
+    }
+
+    h1 {
+        color: black;
+    }
+
+    h2 {
+        color: black;
+        margin-top: 30px;
+    }
+
+    .block {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-top: 10px;
+        background: white;
+    }
+
+    /* ===== Задание 2 ===== */
+    .task2 p {
+        color: green;
+    }
+
+    .task2 .text {
+        color: darkgreen;
+    }
+
+    /* ===== Задание 3 ===== */
+    .task3 p {
+        color: blue;
+    }
+
+    .task3 p {
+        color: red;
+    }
+
+    /* ===== Задание 4 ===== */
+    .task4 p {
+        color: blue;
+    }
+
+    .task4 .text {
+        color: green;
+    }
+
+    .task4 #box p {
+        color: red;
+    }
+
+    /* ===== Задание 5 (карточка) ===== */
+    .card {
+        border: 1px solid #ccc;
+        padding: 20px;
+        width: 250px;
+        background: white;
+        color: black;
+    }
+
+    .card h3 {
+        margin: 0 0 10px;
+    }
+
+    .card p {
+        color: gray;
+    }
+
+    .card p {
+        color: black; /* каскад */
+    }
+
+    #btn {
+        padding: 5px 10px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<h1>Практическое задание №13</h1>
+<p>Наследование, специфичность и каскад</p>
+
+<h2>Задание 1 — Наследование</h2>
+<div class="block">
+    <p>Этот текст наследует цвет от body</p>
+    <p>И этот тоже</p>
+</div>
+
+<h2>Задание 2 — Специфичность</h2>
+<div class="block task2">
+    <p class="text">Какой цвет у этого текста?</p>
+</div>
+
+<h2>Задание 3 — Каскад</h2>
+<div class="block task3">
+    <p>Этот текст покажет каскад</p>
+</div>
+
+<h2>Задание 4 — Комбинация</h2>
+<div class="block task4">
+    <div id="box">
+        <p class="text">Какой итоговый цвет?</p>
+    </div>
+</div>
+
+<h2>Задание 5 — Карточка</h2>
+
+<div class="card">
+    <h3>Карточка</h3>
+    <p class="desc">Описание карточки</p>
+    <button class="btn">Кнопка</button>
+</div>
+
+<style>
+.card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 260px;
+    background: #fff;
+}
+
+/* заголовок */
+.card h3 {
+    margin: 0 0 10px;
+    color: black;
+}
+
+
+.card .desc {
+    color: red;}
+
+.card p {
+    color: gray;
+}
+
+
+.btn {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background: #e0e0e0;
+    border: 1px solid #aaa;
+    cursor: pointer;
+}
+</style>
+
+</body>
+</html>

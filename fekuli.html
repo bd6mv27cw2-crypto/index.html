@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио Фериде</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+/* Сброс */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background: #f4f7fb;
+    color: #333;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* Контейнер */
+.container{
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Шапка */
+header{
+    background: linear-gradient(135deg, #c6186c, #ff8da1);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.header-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo h1{
+    color: white;
+    font-size: 32px;
+    font-family: 'Playfair Display', serif;
+}
+
+.logo p{
+    color: #ffd166; /* Сделали более читаемым на розовом фоне */
+    font-size: 14px;
+    font-weight: 600;
+}
+
+nav{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover{
+    color: #ffd166;
+}
+
+/* Hero Секция */
+.hero{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #f8f8ff 0%, #eef2f7 100%);
+}
+
+.hero-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.hero-text{
+    flex: 1;
+    animation: fadeIn 1s ease;
+}
+
+.hero-text h2{
+    font-size: 55px;
+    margin-bottom: 20px;
+    color: #c6186c;
+    font-family: 'Playfair Display', serif;
+}
+
+.hero-text p{
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Анимация главной фотки */
+.hero-image img{
+    width: 370px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(198, 24, 108, 0.2);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: floatImage 4s ease-in-out infinite; /* Эффект плавания */
+}
+
+.hero-image img:hover{
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 20px 40px rgba(198, 24, 108, 0.4);
+}
+
+/* Кнопка */
+.btn{
+    display: inline-block;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #c6186c, #ff8da1);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s all;
+}
+
+.btn:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(198, 24, 108, 0.3);
+}
+
+/* Секции */
+section{
+    padding: 90px 0;
+}
+
+.section-title{
+    text-align: center;
+    font-size: 45px;
+    margin-bottom: 50px;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, #c6186c, #522157, #ff8da1);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineGradient 4s linear infinite; /* Переливание заголовка */
+}
+
+/* Обо мне */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.name-title{
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: #ff4d6d;
+    font-family: 'Playfair Display', serif;
+}
+
+.bio{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+    transition: 0.3s;
+}
+
+.bio:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.bio p{
+    flex: 1;
+    font-size: 18px;
+}
+
+/* Анимация мини-фотографий в истории */
+.my-image img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+}
+
+.my-image img:hover {
+    transform: scale(1.08) rotate(-3deg);
+    box-shadow: 0 15px 30px rgba(255, 77, 109, 0.3);
+}
+
+/* Карточки фактов с ПЕРЕЛИВАНИЕМ */
+.facts{
+    display: flex;
+    color: white;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 50px;
+    justify-content: center;
+}
+
+.fact-card{
+    background: linear-gradient(135deg, #c2649a, #522157, #c6186c);
+    background-size: 200% auto;
+    padding: 16px 28px;
+    border-radius: 15px;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.4s all;
+    animation: shineGradient 4s linear infinite; /* Постоянное переливание фона */
+}
+
+.fact-card:hover{
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(82, 33, 87, 0.4);
+}
+
+/* Проекты */
+.projects-grid{
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.project-card{
+    background: white;
+    width: 320px;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: 0.4s all;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(198, 24, 108, 0.15);
+}
+
+.project-card h3{
+    margin-bottom: 15px;
+    color: #c6186c;
+    font-size: 22px;
+}
+
+.project-card p {
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: #666;
+}
+/* Навыки */
+.skills {
+    background: #FFFFFF; /* Элегантный темно-угольный фон для контраста */
+    color: white;
+}
+
+.skills .section-title {
+    background: linear-gradient(135deg, #ff4d8d, #ff8da1, #c6186c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.skills-grid {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.skill-card {
+    background: #FFFFFF; 
+    border: 1px solid rgba(255, 77, 141, 0.15);
+    width: 320px;
+    padding: 35px 25px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+}
+
+/* Эффект ПЕРЕЛИВАНИЯ при наведении */
+.skill-card:hover {
+    transform: translateY(-10px);
+    /* Градиент, который будет переливаться */
+    background: linear-gradient(135deg, #c6186c, #ff4d8d, #ff8da1, #522157);
+    background-size: 300% 300%;
+    animation: skillShine 4s ease infinite; /* Запуск переливания */
+    border-color: transparent;
+    box-shadow: 0 15px 30px rgba(198, 24, 108, 0.3);
+}
+
+/* Меняем цвет текста на белый при наведении, чтобы всё читалось */
+.skill-card:hover h3 {
+    color: #ffffff;
+}
+
+.skill-card:hover p {
+    color: #f0f0f0;
+}
+
+.skill-card:hover .skill-icon {
+    color: #ffd166; /* Иконка становится золотистой на розовом переливающемся фоне */
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Новая анимация для плавного перелива цветов внутри карточки */
+@keyframes skillShine {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Эффект неонового свечения при наведении */
+.skill-card:hover {
+    transform: translateY(-10px);
+    border-color: #ff4d8d;
+    box-shadow: 0 10px 30px rgba(198, 24, 108, 0.3);
+}
+
+.skill-icon {
+    font-size: 45px;
+    color: #ff4d8d;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.skill-card:hover .skill-icon {
+    transform: scale(1.15);
+    color: #ff8da1;
+}
+
+.skill-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.5px;
+}
+
+.skill-card p {
+    font-size: 14px;
+    color: #b3b3b3;
+    line-height: 1.6;
+}
+/* Контакты */
+.contacts{
+    background: linear-gradient(135deg, #eef7ff, #ffffff);
+}
+
+.contacts-content{
+    text-align: center;
+}
+
+.contacts-content p{
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.socials{
+    margin: 25px 0;
+}
+
+.socials a{
+    color: #ff4d8d;
+    font-size: 32px;
+    margin: 0 12px;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.socials a:hover{
+    color: #c6186c;
+    transform: scale(1.25) rotate(10deg);
+}
+
+/* Подвал */
+footer{
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    font-size: 14px;
+}
+
+/* Кнопка вверх */
+.top-btn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background: #c6186c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 20px;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 999;
+}
+
+.top-btn:hover{
+    background: #522157;
+    transform: translateY(-5px);
+}
+
+/* --- АНИМАЦИИ --- */
+
+/* Плавный въезд контента */
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Эффект покачивания/плавания для фото */
+@keyframes floatImage {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Эффект мягкого переливания цветов градиента */
+@keyframes shineGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Адаптивность */
+@media(max-width:992px){
+    .hero-content{
+        flex-direction: column-reverse; /* Картинка будет сверху на мобильных */
+        text-align: center;
+    }
+    
+    .bio {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .my-image img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+
+    .facts{
+        justify-content: center;
+    }
+}
+
+@media(max-width:768px){
+    .header-content{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav{
+        justify-content: center;
+    }
+
+    .hero-text h2{
+        font-size: 38px;
+    }
+
+    .section-title{
+        font-size: 35px;
+    }
+
+    .hero-image img{
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media(max-width:480px){
+    .hero-text h2{
+        font-size: 30px;
+    }
+
+    .name-title{
+        font-size: 24px;
+    }
+
+    .project-card{
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="container header-content">
+        <div class="logo">
+            <h1>Фериде</h1>
+            <p>Frontend Developer</p>
+        </div>
+        <nav>
+    <a href="#home">Главная</a>
+    <a href="#about">Обо мне</a>
+    <a href="#skills">Навыки</a> <a href="#projects">Проекты</a>
+    <a href="#contacts">Контакты</a>
+</nav>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <div class="container hero-content">
+        <div class="hero-text">
+            <h2>Ознакомительная страница 📌</h2>
+            <p>Я начинающий Frontend-разработчик, люблю создавать красивые, современные и адаптивные сайты.</p>
+            <a href="#projects" class="btn">Смотреть работы по web-разработке</a>
+        </div>
+        <div class="hero-image">
+            <img src="C:\Sublime Text\ознаком.jpg" alt="Фото">
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="container">
+        <h2 class="section-title">Обо мне</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3 class="name-title">Каныбекова Фериде Жанышбековна</h3>
+
+                <div class="bio">
+                    <p>Я родилась в Иссык-Кульской области в городе Каракол 19 февраля 2007 года.</p>
+                    <div class="my-image"><img src="C:\Sublime Text\child.jpeg" alt="Детство"></div>
+                </div>
+
+                <div class="bio">
+                    <p>Свои младшие классы я окончила в родном селе Кок-Добо. С самого детства меня привлекали точные науки, интерес к которым со временем только рос.</p>
+                    <div class="my-image"><img src="C:\Sublime Text\elementary.jpeg" alt="Школа"></div>
+                </div>
+
+                 <div class="bio">
+                    <p>9 класс я окончила и получила аттестат в России, в городе Кировск. Там я познакомилась с интересными людьми и именно тогда поняла, что хочу развиваться в техническом направлении.</p>
+                    <div class="my-image"><img src="C:\Sublime Text\russia.jpeg" alt="Россия"></div>
+                </div>
+                
+                <div class="bio">
+                    <p>Окончила школу в 2025 году и прошла на бюджет сразу в два университета: один — по гуманитарному направлению, другой — по техническому.</p>
+                    <div class="my-image"><img src="C:\Sublime Text\graduation.jpeg" alt="Выпускной"></div>
+                </div>
+
+                <div class="bio">
+                    <p>Сейчас я заканчиваю 1-курс политеха в направлении ИТУ-2-25. Постепенно развиваюсь в IT-сфере, осваиваю новые технологии и прокачиваю свои навыки, чтобы в будущем стать специалистом.</p>
+                    <div class="my-image"><img src="C:\Sublime Text\Без названия.png" alt="Университет"></div>
+                </div>
+
+                <div class="facts">
+                    <div class="fact-card">🌍 Дата рождения: 19.01.2007</div>
+                    <div class="fact-card">📍 Родилась и выросла в г. Каракол</div>
+                    <div class="fact-card">📚 В 2025 году окончила среднюю школу №15</div>
+                    <div class="fact-card">🎓 Студент факультета информационных технологий</div>
+                    <div class="fact-card">💻 Изучаю языки Python, HTML и CSS</div>
+                    <div class="fact-card">✨ Развиваюсь в сфере frontend-разработки</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="skills" id="skills">
+    <div class="container">
+        <h2 class="section-title">Мои навыки</h2>
+        <div class="skills-grid">
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
+                <h3>HTML5</h3>
+                <p>Создание чистой, валидной и семантической структуры веб-страниц.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-brands fa-css3-alt"></i></div>
+                <h3>CSS3 & Flexbox</h3>
+                <p>Адаптивная верстка, построение гибких сеток и работа с Box Model.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>CSS Animations</h3>
+                <p>Создание плавных переходов, кастомных `@keyframes` и интерактивных эффектов.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <h3>Responsive Design</h3>
+                <p>Оптимизация интерфейсов под любые разрешения экранов и мобильные устройства.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
+                <h3>Python (Базовый)</h3>
+                <p>Изучение основ программирования, логики алгоритмов и работы с данными.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-solid fa-palette"></i></div>
+                <h3>Digital Art & AI</h3>
+                <p>Генерация и обработка изображений, работа со стилями и визуальным контентом.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="projects" id="projects">
+    <div class="container">
+        <h2 class="section-title">Мои практические работы</h2>
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <h3>Оформление фона, рамок (border)</h3>
+                <p>Адаптивная HTML/CSS-страница с оформленными блоками и текстом.</p>
+                <a href="rjf.html" class="btn">Смотреть</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Боксовая модель (Box Model) в CSS</h3>
+                <p>Изучение свойств margin, padding, border, width и box-sizing.</p>
+                <a href="fekuli.html" class="btn">Смотреть</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Селекторы и стилизация</h3>
+                <p>Применены основные селекторы CSS: по тегу, классу и id.</p>
+                <a href="ryt.html" class="btn">Смотреть</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Наследование и каскад</h3>
+                <p>Приоритет, специфичность и наследование стилей в CSS.</p>
+                <a href="jag.html" class="btn">Смотреть</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Flexbox и анимация в CSS</h3>
+                <p>Простая и сложная анимация элементов, выравнивание через Flexbox.</p>
+                <a href="tar.html" class="btn">Смотреть</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="contacts" id="contacts">
+    <div class="container">
+        <h2 class="section-title">Контакты</h2>
+        <div class="contacts-content">
+            <p><i class="fa-solid fa-envelope"></i> f.kanybekova19@example.com</p>
+            <p><i class="fa-solid fa-phone"></i> +996 709 190 207</p>
+            
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-telegram"></i></a>
+            </div>
+
+            <a href="mailto:f.kanybekova19@example.com" class="btn">Связаться</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 Каныбекова Фериде Жанышбековна
+</footer>
+
+<a href="#home" class="top-btn">
+    <i class="fa-solid fa-arrow-up"></i>
+</a>
+
+</body>
+</html>

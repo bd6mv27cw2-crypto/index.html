@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flexbox и Animation — Котики</title>
+
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body{
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        padding: 30px;
+        color: #333;
+    }
+
+    h2{
+        text-align: center;
+        margin: 40px 0 20px;
+    }
+
+    /* ================= ЗАДАНИЕ 1 ================= */
+
+    .cards-container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .card{
+        width: 250px;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+        transition: 0.4s;
+    }
+
+    .card h3{
+        margin-bottom: 10px;
+    }
+
+    .card p{
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    .card button{
+        padding: 10px 20px;
+        border: none;
+        background: #ff9800;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .card:hover{
+        background: #fff3e0;
+        transform: translateY(-10px);
+        box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+    }
+
+    /* ================= ЗАДАНИЕ 2 ================= */
+
+    .buttons-panel{
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .btn{
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        background: #ff5722;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+
+        transition: 0.4s;
+    }
+
+    .btn:hover{
+        background: #e64a19;
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    /* ================= ЗАДАНИЕ 3 ================= */
+
+    .catalog{
+        margin-top: 40px;
+    }
+
+    .products{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+
+    .product-card{
+        width: 280px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+
+        transition: 0.4s;
+
+        animation: showCard 1s ease forwards;
+        opacity: 0;
+    }
+
+    .product-card:nth-child(1){
+        animation-delay: 0.3s;
+    }
+
+    .product-card:nth-child(2){
+        animation-delay: 0.6s;
+    }
+
+    .product-card:nth-child(3){
+        animation-delay: 0.9s;
+    }
+
+    .product-card img{
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .product-info{
+        padding: 15px;
+    }
+
+    .product-info h3{
+        margin-bottom: 10px;
+    }
+
+    .product-info p{
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+
+    .price{
+        font-size: 22px;
+        color: #e91e63;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .buy-btn{
+        padding: 10px 20px;
+        border: none;
+        background: #4caf50;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+
+        transition: 0.3s;
+    }
+
+    .buy-btn:hover{
+        background: #388e3c;
+        transform: scale(1.05);
+    }
+
+    .product-card:hover{
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+    }
+
+    /* ================= ANIMATION ================= */
+
+    @keyframes showCard{
+
+        from{
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        to{
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    }
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= ЗАДАНИЕ 1 ================= -->
+
+<h2>Задание 1 — Карточки про котиков</h2>
+
+<div class="cards-container">
+
+    <div class="card">
+        <h3>Сонные котики</h3>
+
+        <p>
+            Котики любят спать по 12–16 часов в день
+            и находить самые уютные места в доме.
+        </p>
+
+        <button>Подробнее</button>
+    </div>
+
+    <div class="card">
+        <h3>Игры котиков</h3>
+
+        <p>
+            Маленькие котята очень активные
+            и любят играть с мячиками и нитками.
+        </p>
+
+        <button>Подробнее</button>
+    </div>
+
+    <div class="card">
+        <h3>Любимые лакомства</h3>
+
+        <p>
+            Многие кошки обожают рыбу,
+            курицу и специальные кошачьи вкусняшки.
+        </p>
+
+        <button>Подробнее</button>
+    </div>
+
+    <div class="card">
+        <h3>Пушистые друзья</h3>
+
+        <p>
+            Кошки помогают расслабиться
+            и делают дом уютнее своим мурчанием.
+        </p>
+
+        <button>Подробнее</button>
+    </div>
+
+</div>
+
+
+<!-- ================= ЗАДАНИЕ 2 ================= -->
+
+<h2>Задание 2 — Панель кнопок</h2>
+
+<div class="buttons-panel">
+
+    <button class="btn">
+        Котики
+    </button>
+
+    <button class="btn">
+        Фото
+    </button>
+
+    <button class="btn">
+        Контакты
+    </button>
+
+</div>
+
+
+<!-- ================= ЗАДАНИЕ 3 ================= -->
+
+<h2>Задание 3 — Каталог товаров для котиков</h2>
+
+<section class="catalog">
+
+    <div class="products">
+
+        <!-- Карточка 1 -->
+
+        <div class="product-card">
+
+            <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbG14crMpRBKSNxM4ZIv3E90o23nrJ6tYyXg&s"
+            alt="Корм для кота"
+            >
+
+            <div class="product-info">
+
+                <h3>Кошачий корм🥣</h3>
+
+                <p>
+                    Полезный и вкусный корм
+                    для активных и здоровых котиков.
+                </p>
+
+                <div class="price">
+                    850 сом
+                </div>
+
+                <button class="buy-btn">
+                    Купить
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Карточка 2 -->
+
+        <div class="product-card">
+
+            <img
+            src="https://st.aestatic.net/items-img-11/R/A/8/D/45f3b370d9a2ae7716a5d152fe6d36cc.jpg_480x480.jpg"
+            alt="Игрушка для кота"
+            >
+
+            <div class="product-info">
+
+                <h3>Игрушка-кулачок😽</h3>
+
+                <p>
+                    Яркая игрушка для весёлых игр
+                    и активного отдыха котёнка.
+                </p>
+
+                <div class="price">
+                    300 сом
+                </div>
+
+                <button class="buy-btn">
+                    Купить
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Карточка 3 -->
+
+        <div class="product-card">
+
+            <img
+            src="https://cs11.livemaster.ru/storage/topicavatar/600x450/8b/d9/1b8cc7ecf8192c7dd1e04270e025dffa5e3evi.jpg?h=oZDgMxyCufSZ_tSi5WKqVQ"
+            alt="Домик для кота"
+            >
+
+            <div class="product-info">
+
+                <h3>Домик для кота🏡</h3>
+
+                <p>
+                    Мягкий и уютный домик,
+                    где котик сможет отдыхать и спать.
+                </p>
+
+                <div class="price">
+                    2 500 сом
+                </div>
+
+                <button class="buy-btn">
+                    Купить
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>
