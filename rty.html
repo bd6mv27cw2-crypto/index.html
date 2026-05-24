@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио Фериде</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* Сброс стилей */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+/* --- ГЛОБАЛЬНЫЙ "МУТНЫЙ" ФОН (из референса) --- */
+body{
+    font-family: 'Montserrat', sans-serif;
+    /* Мягкий пыльно-розовый матовый градиент как основа */
+    background: linear-gradient(135deg, #e3c4c8 0%, #c4b5b7 50%, #d4afb7 100%);
+    background-attachment: fixed;
+    color: #232323; /* Темный текст для контраста */
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Эстетичные фоновые сферы (Soft Blur) */
+body::before, body::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    opacity: 0.35;
+    pointer-events: none;
+    animation: pulseGlow 10s ease-in-out infinite alternate;
+}
+body::before {
+    width: 500px;
+    height: 500px;
+    background: #ffffff; 
+    top: 10%;
+    right: -10%;
+}
+body::after {
+    width: 400px;
+    height: 400px;
+    background: #b5b8b1; 
+    bottom: 20%;
+    left: -10%;
+    animation-delay: 5s;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(50px, -30px); }
+}
+
+/* Контейнер */
+.container{
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* "Стеклянная" Шапка (Glassmorphism) */
+header{
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px); /* Сильное размытие фона за шапкой */
+    -webkit-backdrop-filter: blur(15px);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.header-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo h1{
+    color: #232323;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo p{
+    color: #ffffff; /* Светлый акцент в лого */
+    background: #232323;
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+nav{
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+nav a{
+    color: #4a4a4a;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+nav a:hover{
+    color: #232323;
+    transform: translateY(-2px);
+}
+
+/* --- HERO СЕКЦИЯ (Подсветка и движение главного фото) --- */
+.hero{
+    padding: 50px 0;
+}
+
+.hero-banner {
+    background: #ffffff; 
+    color: #232323;
+    border-radius: 24px;
+    padding: 60px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-text{
+    flex: 1;
+}
+
+.hero-text .badge {
+    display: inline-block;
+    background: #d4afb7;
+    color: #ffffff;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px;
+}
+
+.hero-text h2{
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 600;
+    font-style: italic; 
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.hero-text p{
+    font-size: 17px;
+    color: #4a4a4a;
+    margin-bottom: 40px;
+    max-width: 500px;
+    font-weight: 500;
+}
+
+/* Главное фото с ПОДСТВЕТКОЙ И ДВИЖЕНИЕМ */
+.hero-image {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-image img{
+    width: 320px;
+    height: 400px;
+    border-radius: 20px;
+    object-fit: cover;
+    /* Постоянная мягкая подсветка сзади */
+    box-shadow: 0 0 35px rgba(212, 175, 183, 0.5), 
+                0 15px 35px rgba(0,0,0,0.1);
+    /* Анимация движения (дыхание) */
+    animation: floatingHero 6s ease-in-out infinite;
+}
+
+@keyframes floatingHero {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Кнопки */
+.btn{
+    display: inline-block;
+    padding: 16px 36px;
+    background: #232323;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 30px; /* Округлые кнопки */
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn:hover{
+    background: #d4afb7;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(212, 175, 183, 0.3);
+}
+
+/* Секции */
+section{
+    padding: 80px 0;
+}
+
+.section-title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 60px;
+    color: #232323;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #d4afb7;
+    margin: 10px auto 0 auto;
+    border-radius: 2px;
+}
+
+/* --- СЕТКА КАРТОЧЕК --- */
+.about-content, .skills-grid, .projects-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* БЛОК "ОБО МНЕ" (Крупнее фото и подписи, анимация фото) */
+.bio {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    padding: 40px;
+    color: #232323;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    transition: 0.4s;
+}
+
+/* УВЕЛИЧЕННЫЕ описания внутри карточек */
+.bio p {
+    font-size: 17px;
+    color: #333;
+    font-weight: 500;
+    flex: 1;
+    line-height: 1.7;
+}
+
+/* УВЕЛИЧЕННЫЙ размер вставленных фото */
+.my-image {
+    width: 220px;
+    height: 220px;
+    border-radius: 20px;
+    overflow: hidden; 
+    border: 3px solid #d4afb7;
+    box-shadow: 0 10px 25px rgba(212, 175, 183, 0.2);
+}
+
+.my-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+}
+
+/* АНИМАЦИЯ ФОТО ПРИ НАВЕДЕНИИ */
+.bio:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+}
+.bio:hover .my-image img {
+    transform: scale(1.15); 
+}
+
+/* Плашки-теги (Факты) */
+.facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+.fact-card {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(212, 175, 183, 0.3);
+    color: #232323;
+    padding: 14px 28px;
+    border-radius: 35px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.fact-card:hover {
+    background: #d4afb7;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+/* СТИЛИ ДЛЯ КАРТОЧЕК НАВЫКОВ 
+
+/* Сетка для навыков */
+.skills-grid {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+/* Карточка навыка: аккуратный размер и матовое стекло */
+.skill-card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 22px; /* Мягкие скруглённые углы */
+    padding: 30px 25px;   /* Компактные внутренние отступы */
+    color: #232323;
+    width: 280px;         /* Оптимальная ширина, чтобы карточки смотрелись аккуратно */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    
+    /* Плавный переход для движения, фона и тени */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                box-shadow 0.4s ease, 
+                background-color 0.4s ease;
+}
+
+/* Иконка внутри карточки */
+.skill-icon {
+    font-size: 38px; /* Изящный размер иконки */
+    color: #d4afb7;  /* Нежно-розовый цвет по умолчанию */
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
+}
+
+/* Текстовые стили */
+.skill-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.skill-card p {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* --- ЭФФЕКТЫ ПРИ НАВЕДЕНИИ КУРСОРA --- */
+.skill-card:hover {
+    /* 1. Карточка плавно приподнимается и слегка увеличивается */
+    transform: translateY(-10px) scale(1.03);
+    background: #ffffff;
+    
+    /* 2. Загорается яркая бьюти-подсветка (малиновый неоновый glow) */
+    box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.1), 
+                0 0 30px rgba(224, 30, 90, 0.4); 
+}
+
+/* Анимация иконки при наведении на карточку */
+.skill-card:hover .skill-icon {
+    color: #e01e5a; /* Иконка становится сочно-малиновой, как акценты RM.BEAUTY */
+    transform: scale(1.15) rotate(4deg); /* Плавно увеличивается и слегка поворачивается */
+}
+
+/* --- ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ КАРТОЧЕК ПРАКТИЧЕСКИХ РАБОТ --- */
+
+/* Сетка для карточек */
+.projects-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+/* Сама карточка: матовое белое стекло с мягким переходом */
+.project-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 28px; /* Округлые аккуратные углы как на скрине */
+    padding: 40px;
+    color: #232323;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+    
+    /* Плавность для ВСЕХ изменений (движение, тень, цвет) */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                box-shadow 0.4s ease, 
+                background-color 0.4s ease;
+}
+
+/* Текстовые стили внутри карточки */
+.project-card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.project-card p {
+    font-size: 14.5px;
+    color: #555;
+    margin-bottom: 35px;
+    line-height: 1.7;
+}
+
+/* Кнопка "СМОТРЕТЬ" в обычном состоянии */
+.project-card .btn {
+    align-self: flex-start;
+    padding: 12px 32px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: #ffffff;
+    color: #232323;
+    border: 2px solid #232323;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+/* --- МАГИЯ АНИМАЦИИ И ПОДСВЕТКИ ПРИ НАВЕДЕНИИ КУРСОРA --- */
+.project-card:hover {
+    /* 1. Карточка плавно приподнимается вверх и увеличивается */
+    transform: translateY(-12px) scale(1.02);
+    background: #ffffff;
+    
+    /* 2. Сзади загорается яркая малиново-розовая неоновая аура в стиле RM.BEAUTY */
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1), 
+                0 0 35px rgba(224, 30, 90, 0.45); /* Тот самый сочный розовый акцент */
+}
+
+/* Анимация кнопки внутри активной карточки */
+.project-card:hover .btn {
+    background: #232323; /* Кнопка инвертируется в черный цвет */
+    color: #ffffff;
+    transform: scale(1.05); /* Кнопка становится чуть больше */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Секция Контакты (Светлая нежная подложка) */
+.contacts-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 60px 50px;
+    border-radius: 24px;
+    color: #232323;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.contacts-content p {
+    margin-bottom: 20px;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.contacts-content p i {
+    color: #ffffff;
+    background: #d4afb7;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 50%;
+    margin-right: 12px;
+    font-size: 14px;
+}
+
+.socials {
+    margin: 30px 0;
+}
+
+.socials a {
+    color: #232323;
+    font-size: 32px;
+    margin: 0 15px;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.socials a:hover {
+    transform: translateY(-5px) scale(1.1);
+    color: #d4afb7;
+}
+
+.contacts-content .btn {
+    width: 100%;
+    background: #d4afb7;
+}
+
+.contacts-content .btn:hover {
+    background: #232323;
+}
+
+/* Подвал */
+footer{
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: #4a4a4a;
+    text-align: center;
+    padding: 30px;
+    font-size: 13px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Кнопка наверх */
+.top-btn{
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 48px;
+    height: 48px;
+    background: #d4afb7;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    z-index: 999;
+    box-shadow: 0 6px 18px rgba(212, 175, 183, 0.3);
+}
+
+.top-btn:hover{
+    background: #232323;
+    transform: translateY(-4px);
+}
+
+/* АНИМАЦИИ ПОЯВЛЕНИЯ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media(max-width:992px){
+    .hero-banner { flex-direction: column; text-align: center; padding: 40px 30px; }
+    .hero-text p { margin: 0 auto 30px auto; }
+    .hero-image img { width: 100%; max-width: 280px; height: auto; }
+    .bio { flex-direction: column-reverse; text-align: center; gap: 30px; }
+    .my-image { width: 180px; height: 180px; }
+}
+
+@media(max-width:768px){
+    .header-content { flex-direction: column; }
+    nav { justify-content: center; gap: 15px; }
+    .hero-text h2 { font-size: 34px; }
+    .section-title { font-size: 24px; }
+    .skill-card { width: 100%; max-width: 280px; }
+}
+/* --- СТИЛИ ДЛЯ ИДЕАЛЬНОГО ОТОБРАЖЕНИЯ НА ТЕЛЕФОНАХ --- */
+@media (max-width: 768px) {
+    
+    /* 1. Главный фон и скролл */
+    body {
+        background-attachment: scroll; /* Оптимизация для плавной прокрутки на смартфонах */
+    }
+    
+    /* 2. Главный баннер (Hero) превращается в вертикальную обложку сторис */
+    .hero {
+        padding: 20px 0;
+    }
+    
+    .hero-banner {
+        flex-direction: column-reverse; /* Сначала текст, потом фото сверху, или наоборот */
+        text-align: center;
+        padding: 40px 20px;
+        gap: 30px;
+        border-radius: 20px;
+    }
+    
+    .hero-text h2 {
+        font-size: 32px; /* Уменьшаем шрифт заголовка, чтобы он не переносился коряво */
+        line-height: 1.2;
+    }
+    
+    .hero-image img {
+        width: 100%;
+        max-width: 260px; /* Аккуратный размер главного фото на весь экран */
+        height: 320px;
+    }
+
+    /* 3. Раздел "Обо мне" — фото и текст встают друг под друга */
+    .bio {
+        flex-direction: column; /* Карточка строится вертикально */
+        text-align: center;
+        gap: 25px;
+        padding: 30px 20px;
+    }
+    
+    .bio p {
+        font-size: 15px; /* Слегка уменьшаем текст для читабельности */
+    }
+    
+    .my-image {
+        width: 100%;
+        max-width: 200px; /* Крупные, аккуратные фото на мобильном */
+        height: 200px;
+    }
+
+    /* 4. Сетки карточек (Навыки и Работы) выстраиваются в один аккуратный ряд */
+    .skills-grid, .projects-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; /* Расстояние между карточками на телефоне */
+    }
+
+    .skill-card, .project-card {
+        width: 100%; /* Карточки занимают всю ширину экрана смартфона */
+        max-width: 340px; /* Но не становятся слишком огромными */
+        padding: 30px 20px;
+    }
+    
+    /* 5. Адаптация эффектов для СЕНСОРНЫХ экранов (Touch) */
+    /* Так как на телефонах нет мышки, подсветка и движение будут срабатывать в момент тапа (нажатия пальцем) */
+    .skill-card:active, .project-card:active, .bio:active {
+        transform: scale(0.98) translateY(-3px); /* Эффект "нажатия" (карточка слегка вдавливается) */
+        box-shadow: 0 10px 25px rgba(224, 30, 90, 0.35); /* Розовое свечение при тапе */
+    }
+    
+    .bio:active .my-image img {
+        transform: scale(1.1); /* Фото увеличивается при нажатии на карточку */
+    }
+
+    /* 6. Кнопки и контакты */
+    .btn {
+        width: 100%; /* Кнопки становятся на всю ширину карточки, чтобы удобно было попадать пальцем */
+        text-align: center;
+        padding: 14px 24px;
+        font-size: 13px;
+    }
+    
+    .contacts-content {
+        padding: 40px 20px;
+        border-radius: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="container header-content">
+        <div class="logo">
+            <h1>КАНЫБЕКОВА ФЕРИДЕ</h1>
+            <p>student</p>
+        </div>
+        <nav>
+            <a href="#home">Главная</a>
+            <a href="#about">Обо мне</a>
+            <a href="#skills">Навыки</a>
+            <a href="#projects">Проекты</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-banner">
+            <div class="hero-text">
+                <span class="badge">Ознакомительная страница 📌</span>
+                <h2>портфолио</h2>
+                <p>Я начинающий веб-разработчик. Интерес к созданию сайтов и дизайну</p>
+                <a href="#projects" class="btn">Смотреть работы</a>
+            </div>
+            <div class="hero-image">
+                <img src="C:\Sublime Text\ознаком.jpg" alt="Главное фото">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="container">
+        <h2 class="section-title">Обо мне</h2>
+        <div class="about-content">
+            
+            <div class="bio">
+                <p>Я родилась в Иссык-Кульской области в городе Каракол 19 февраля 2007 года вторым ребенком. У нас в двое мальчика, и я-единственная девочка. Поэтому я росла в больше мальчишеской среде, что по-своему повлияло на мой характер.</p>
+                <div class="my-image"><img src="C:\Sublime Text\child.jpeg" alt="Детство"></div>
+            </div>
+
+            <div class="bio">
+                <p>Свои младшие классы я окончила в родном селе Кок-Добо. С самого детства меня привлекали точные науки, интерес к которым со временем только рос. Особенно мне нравилась математика, потому что любила решать задачи и находить логические решения.</p>
+                <div class="my-image"><img src="C:\Sublime Text\elementary.jpeg" alt="Школа"></div>
+            </div>
+
+             <div class="bio">
+                <p>9 класс я окончила и получила аттестат в России, в городе Кировск. Там я познакомилась с интересными людьми и именно тогда поняла, что хочу развиваться в техническом направлении. Этот этап стал для меня важным опытом и дал мотивацию двигаться дальше.</p>
+                <div class="my-image"><img src="C:\Sublime Text\russia.jpeg" alt="Россия"></div>
+            </div>
+            
+            <div class="bio">
+                <p>Окончила школу в 2025 году и прошла на бюджет сразу в два университета: один — по гуманитарному направлению, другой — по техническому. Я выбрала техническое направление, потому что именно в этой сфере вижу свое будущее и возможности для дальнейшего развития.</p>
+                <div class="my-image"><img src="C:\Sublime Text\graduation.jpeg" alt="Выпускной"></div>
+            </div>
+
+            <div class="bio">
+                <p>Сейчас я заканчиваю 1-курс политеха в направлении ИТУ-2-25. Постепенно развиваюсь в IT-сфере, осваиваю новые технологии и прокачиваю свои навыки. Среди профильных предметов у нас графический дизайн, информатика, веб-разработка, которые помогают мне развиваться в технической сфере и получать практические навыки.</p>
+                <div class="my-image"><img src="C:\Sublime Text\Без названия.png" alt="Университет"></div>
+            </div>
+
+            <div class="facts">
+                <div class="fact-card">🌍 Развиваюсь в IT</div>
+                <div class="fact-card">📍 Изучаю основы программирования</div>
+                <div class="fact-card">📚 Осваиваю веб-разработки</div>
+                <div class="fact-card">🎓 Учусь в ИИТ</div>
+                <div class="fact-card">💻Интересуюсь frontend разработкой</div>
+                <div class="fact-card">✨ Получаю практические навыки</div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<section class="skills" id="skills">
+    <div class="container">
+        <h2 class="section-title">Мои навыки</h2>
+        <div class="skills-grid">
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
+                <h3>HTML</h3>
+                <p>Создание чистой и валидной структуры веб-страниц.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-brands fa-css3-alt"></i></div>
+                <h3>CSS3 & Flexbox</h3>
+                <p>Адаптивная верстка, гибкие сетки и работа с Box Model.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>CSS Animations</h3>
+                <p>Создание плавных переходов и кастомных анимаций.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <h3>Responsive Design</h3>
+                <p>Оптимизация интерфейсов под любые разрешения.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
+                <h3>Python (Базовый)</h3>
+                <p>Изучение основ программирования и логики.</p>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon"><i class="fa-solid fa-palette"></i></div>
+                <h3>JavaScript</h3>
+                <p>Генерация изображений и работа со стилями.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="projects" id="projects">
+    <div class="container">
+        <h2 class="section-title">Практические работы</h2>
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <h3>Оформление фона, рамок (border)</h3>
+                <p>Адаптивная HTML/CSS-страница с оформленными блоками и текстом.</p>
+                <a href="rjf.html" class="btn">Смотреть</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Боксовая модель (Box Model) в CSS</h3>
+                <p>Изучение свойств margin, padding, border, width и box-sizing.</p>
+                <a href="fekuli.html" class="btn">Смотреть</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Селекторы и стилизация</h3>
+                <p>Применены основные селекторы CSS: по тегу, классу и id.</p>
+                <a href="ryt.html" class="btn">Смотреть</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Наследование и каскад</h3>
+                <p>Приоритет, специфичность и наследование стилей в CSS.</p>
+                <a href="jag.html" class="btn">Смотреть</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Flexbox и анимация в CSS</h3>
+                <p>Простая и сложная анимация элементов, выравнивание через Flexbox.</p>
+                <a href="tar.html" class="btn">Смотреть</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="contacts" id="contacts">
+    <div class="container">
+        <h2 class="section-title">Контакты</h2>
+        <div class="contacts-content">
+            <p><i class="fa-solid fa-envelope"></i> f.kanybekova19@gmail.com</p>
+            <p><i class="fa-solid fa-phone"></i> +996 709 190 207</p>
+            
+           <div class="socials">
+    <a href="https://www.instagram.com/kanl6kva" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://t.me/utwna" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+</div>
+
+            <a href="mailto:f.kanybekova19@gmail.com" class="btn">Связаться</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 Каныбекова Фериде Жанышбековна
+</footer>
+
+<a href="#home" class="top-btn">
+    <i class="fa-solid fa-arrow-up"></i>
+</a>
+
+</body>
+</html>
